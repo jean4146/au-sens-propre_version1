@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>STIC – ESI – INP-HB</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Outfit:wght@400;500;700&family=Alex+Brush&display=swap" rel="stylesheet">
+<style>
+:root{box-sizing:border-box;--bg:#fffaf5;--bg2:#fdeee0;--card:#fff;--tx:#24170f;--mut:#75645a;--line:#efe3d8;--a:#ff8a1f;--c:#e8590c;color-scheme:light;padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-mode=light]{--bg:#fffaf5;--bg2:#fdeee0;--card:#fff;--tx:#24170f;--mut:#75645a;--line:#efe3d8;--a:#ff8a1f;--c:#e8590c;color-scheme:light}
+:root[data-mode=dark]{--bg:#1a0f08;--bg2:#2a1a10;--card:#33200f;--tx:#fff1e3;--mut:#d3b9a4;--line:#5a3a22;--a:#ff9a3d;--c:#ff6a1f;color-scheme:dark}
+*{box-sizing:border-box;margin:0}html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.65 'Outfit',system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Syne','Outfit',sans-serif;line-height:1.08;letter-spacing:-.02em}
+#net{position:fixed;inset:0;z-index:0;opacity:.9;pointer-events:none}
+main,footer{position:relative;z-index:1}
+#pg{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--a),var(--c));z-index:60}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;gap:14px;padding:calc(10px + env(safe-area-inset-top,0px)) 4vw 10px;background:color-mix(in srgb,var(--bg) 78%,transparent);backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.logo{font:800 20px 'Syne',sans-serif;color:var(--tx);text-decoration:none;white-space:nowrap}.logo i{color:var(--c);font-style:normal}
+#links{display:flex;gap:2px;overflow-x:auto;flex:1;scrollbar-width:none}
+#links a{color:var(--mut);text-decoration:none;padding:6px 12px;border-radius:99px;white-space:nowrap;font-size:14px;transition:.25s}
+#links a:hover,#links a.on{color:var(--tx);background:var(--bg2)}
+#th{background:none;border:1px solid var(--line);color:var(--tx);width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px}
+section{padding:110px 3vw 30px;max-width:none;margin:auto}
+h2{font-size:clamp(28px,4.4vw,46px);margin-bottom:10px}
+.lead{color:var(--mut);max-width:62ch;margin-bottom:34px}
+.g{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px;box-shadow:0 10px 30px -22px #24170f88;transition:transform .25s,border-color .25s,box-shadow .25s;transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg))}
+.card:hover{border-color:var(--a);box-shadow:0 18px 50px -20px var(--a)}
+.card h3{font-size:21px;margin-bottom:6px}.card p{color:var(--mut);font-size:15px}
+.pill{display:inline-block;font-size:12.5px;padding:3px 11px;border-radius:99px;border:1px solid var(--line);color:var(--mut);margin:8px 6px 0 0}
+.pill.hot{border-color:var(--c);color:var(--c)}
+/* intro */
+#intro{position:fixed;inset:0;z-index:100;background:#fff1e3;overflow:hidden;transition:opacity 1s}
+#intro.done{opacity:0;pointer-events:none}
+#cam{position:absolute;inset:0;transform-origin:61% 52%;transition:transform 4.6s cubic-bezier(.7,0,.2,1)}
+#intro.go #cam{transform:scale(13)}
+#map{width:100%;height:100%;display:block}
+.pulse{animation:pl 2s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+@keyframes pl{50%{transform:scale(1.35);opacity:.5}}
+.it{position:absolute;left:5vw;top:calc(24px + env(safe-area-inset-top,0px));color:#24170f;font:500 15px 'Outfit',sans-serif;text-shadow:0 2px 12px #fff}
+.it b{font:800 clamp(26px,5vw,44px) 'Syne',sans-serif;display:block}
+#skip{position:absolute;right:5vw;bottom:calc(28px + env(safe-area-inset-bottom,0px));background:#fffd;color:#24170f;border:1px solid #24170f33;border-radius:99px;padding:9px 18px;cursor:pointer;font:inherit}
+/* hero */
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding-top:120px}
+.hero h1{position:relative;z-index:1;font-family:'Alex Brush','Segoe Script',cursive;font-weight:400;letter-spacing:0;line-height:1.02;font-size:clamp(36px,10vw,64px);max-width:none}@media(min-width:980px){.hero h1{font-size:min(145px,6.5vw);white-space:nowrap}}
+.hero h1 em{font-style:normal;background:linear-gradient(100deg,var(--a),var(--c));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero .sub{font-size:clamp(17px,2.2vw,22px);color:var(--mut);margin:22px 0 28px;max-width:54ch}
+#tw{color:var(--a);font-weight:700;border-right:3px solid var(--c);padding-right:4px}
+.btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn{padding:13px 26px;border-radius:99px;border:1px solid var(--line);color:var(--tx);text-decoration:none;font-weight:700;transition:.25s;background:none;cursor:pointer;font-size:15px}
+.btn.p{background:var(--c);border-color:var(--c);color:#06121a}.btn:hover{transform:translateY(-3px);box-shadow:0 10px 30px -10px var(--c)}
+.tick{overflow:hidden;border-block:1px solid var(--line);margin:46px 0 0;background:var(--bg2)}
+.tick div{display:flex;gap:60px;white-space:nowrap;width:max-content;padding:11px 0;animation:mq 38s linear infinite;color:var(--mut)}
+.tick b{color:var(--c)}.tick:hover div{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(-50%)}}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin-top:34px}
+.stats div{border-left:3px solid var(--a);padding-left:14px}.stats b{font:800 38px 'Syne',sans-serif;display:block}.stats span{color:var(--mut);font-size:14px}
+.hero>*{animation:up .9s both}.hero>*:nth-child(2){animation-delay:.15s}.hero>*:nth-child(3){animation-delay:.3s}.hero>*:nth-child(4){animation-delay:.45s}
+body:not(.ready) .hero>*{animation-play-state:paused;opacity:0}
+@keyframes up{from{opacity:0;transform:translateY(34px)}}
+/* tabs, events, team */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tabs button{padding:9px 20px;border-radius:99px;border:1px solid var(--line);background:none;color:var(--mut);cursor:pointer;font:inherit;transition:.2s}
+.tabs button.on{background:var(--a);color:#fff;border-color:var(--a);font-weight:700}
+#tabc{min-height:120px;max-width:74ch;animation:up .5s}
+.info{border-left:4px solid var(--c)}
+.big{grid-column:span 2}
+@media(max-width:620px){.big{grid-column:auto}}
+.av{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;font:800 21px 'Syne',sans-serif;color:#fff;margin-bottom:12px}
+.role{color:var(--c);font-weight:700;font-size:14px}
+.ev{display:flex;gap:18px;align-items:flex-start}.ev .d{min-width:74px;font:800 20px/1.1 'Syne',sans-serif;color:var(--a)}
+.bar{height:7px;border-radius:9px;background:var(--bg2);margin-top:14px;overflow:hidden}.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--a),var(--c));transition:width 1.6s cubic-bezier(.2,.8,.2,1)}
+.gal{columns:3 220px;gap:14px}
+.tile{break-inside:avoid;margin-bottom:14px;border-radius:18px;position:relative;overflow:hidden;cursor:zoom-in;transition:transform .35s}
+.tile:hover{transform:scale(1.03) rotate(-.6deg)}
+.tile span{position:absolute;left:14px;bottom:12px;right:14px;font-weight:700;text-shadow:0 2px 10px #000a;color:#fff}
+.tile small{position:absolute;top:12px;right:12px;background:#000a;color:#fff;border-radius:99px;padding:2px 11px;font-size:12px}
+#lb{position:fixed;inset:0;z-index:90;background:#000d;display:none;place-items:center;padding:6vw}
+#lb.on{display:grid}#lb div{width:min(860px,100%);aspect-ratio:16/10;border-radius:22px;display:flex;align-items:flex-end;padding:26px;font:800 clamp(22px,4vw,38px) 'Syne',sans-serif;color:#fff;animation:up .4s}
+form{display:grid;gap:12px}
+input,textarea,select{background:var(--bg2);border:1px solid var(--line);color:var(--tx);border-radius:14px;padding:13px 15px;font:inherit}
+input:focus,textarea:focus,select:focus,.btn:focus-visible,button:focus-visible{outline:2px solid var(--a);outline-offset:2px}
+footer{text-align:center;color:var(--mut);padding:60px 6vw 40px;font-size:14px}
+.ban{height:clamp(160px,26vw,260px);border-radius:26px;overflow:hidden;margin:0 0 28px;box-shadow:0 22px 50px -28px #24170fbb}
+.ban svg,.ban img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 6s}.ban:hover svg,.ban:hover img{transform:scale(1.08)}
+.thumb{height:120px;margin:-24px -24px 14px;overflow:hidden;border-radius:20px 20px 0 0}.thumb svg{width:100%;height:100%;display:block}
+.ti{position:absolute;inset:0;width:100%;height:100%;stroke:#fff;stroke-width:1.4;fill:none;opacity:.5}
+.hart{position:absolute;right:4vw;top:10vh;width:min(24vw,340px);aspect-ratio:5/3;border-radius:28px;overflow:hidden;box-shadow:0 30px 70px -30px #24170fcc;opacity:.3;animation:fl 6s ease-in-out infinite!important}.hart svg,.hart img{width:100%;height:100%;object-fit:cover;display:block}
+@keyframes fl{50%{transform:translateY(-14px) rotate(.6deg)}}@media(max-width:980px){.hart{display:none}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}#cam{transition:none!important}}
+</style>
+</head>
+<body>
+<div id="pg"></div><canvas id="net"></canvas>
+<div id="intro"><div id="cam"><svg id="map" viewBox="0 0 1000 600" preserveAspectRatio="xMidYMid slice"></svg></div>
+<div class="it"><b>INP-HB, Yamoussoukro</b><span id="itx">Vue aérienne du campus. Cap sur l’École Supérieure d’Industrie.</span></div>
+<button id="skip">Passer l’intro</button></div>
+<nav><a class="logo" href="#accueil">M<i>I</i>S</a><div id="links"></div><button id="th" aria-label="Changer de thème">◐</button></nav>
+<main>
+<section id="accueil" class="hero">
+<h1>Managers of Information System,<br><em>nous tenons le Monde au sens propre.</em></h1>
+<p class="sub">La filière STIC de l’École Supérieure d’Industrie, à l’INP-HB, forme des ingénieurs en Informatique, en Électronique et en Télécommunications. Ici, on parle de <span id="tw"></span></p>
+<div class="btns"><a class="btn p" href="#projets">Voir les projets</a><a class="btn" href="#evenements">Prochains événements</a><a class="btn" href="#contact">Nous rejoindre</a></div>
+<div class="stats" id="stats"></div>
+<div class="tick"><div id="tk"></div></div>
+</section>
+<section id="apropos"><h2>À propos de la filière</h2><p class="lead">STIC réunit trois spécialités d’ingénieur autour d’une même idée : maîtriser toute la chaîne du numérique, du capteur au cloud. L’association anime cette communauté.</p>
+<div class="tabs" id="tabs"></div><div class="card info" id="tabc"></div>
+<h3 style="margin:42px 0 16px;font-size:28px">Trois spécialités d’ingénieur</h3><div class="g" id="sp"></div></section>
+<section id="equipe"><h2>Le bureau et l’équipe</h2><p class="lead">Des élèves-ingénieurs bénévoles qui organisent la vie de la filière toute l’année.</p><div class="g" id="eq"></div></section>
+<section id="evenements"><h2>Événements</h2><p class="lead">Conférences, rencontres, journées culturelles et ateliers. Filtrez par type.</p><div class="tabs" id="ef"></div><div class="g" id="ev"></div></section>
+<section id="alumni"><h2>Alumni</h2><p class="lead">Nos diplômés travaillent dans la banque, les télécoms, l’industrie et la tech. Ils reviennent mentorer la nouvelle promotion.</p><div class="g" id="al"></div></section>
+<section id="actualites"><h2>Actualités</h2><p class="lead">Annonces, nouvelles et communiqués de la filière.</p><div class="g" id="nw"></div></section>
+<section id="projets"><h2>Projets</h2><p class="lead">Des réalisations concrètes, menées par les étudiants, avec une forte part d’informatique.</p><div class="g" id="pj"></div></section>
+<section id="galerie"><h2>Galerie</h2><p class="lead">Photos et vidéos des activités. Cliquez sur une vignette pour l’agrandir.</p><div class="gal" id="ga"></div></section>
+<section id="contact"><h2>Contact</h2><p class="lead">Une question, une idée de partenariat, une envie d’intervenir ? Écrivez-nous.</p>
+<div class="g"><div class="card"><h3>Écrire à l’association</h3><p>stic.esi@exemple.ci<br>ESI, INP-HB, Yamoussoukro, Côte d’Ivoire</p><div><span class="pill">Facebook</span><span class="pill">Instagram</span><span class="pill">LinkedIn</span><span class="pill">WhatsApp</span><span class="pill">YouTube</span></div></div>
+<form class="card" id="fm"><input id="fn" placeholder="Votre nom" required><input id="fe" type="email" placeholder="Votre e-mail" required><select id="fs"><option>Question générale</option><option>Partenariat</option><option>Intervention ou conférence</option><option>Rejoindre l’association</option></select><textarea id="fx" rows="4" placeholder="Votre message" required></textarea><button class="btn p" type="submit">Envoyer le message</button><p id="ok" style="color:var(--a)"></p></form></div></section>
+</main>
+<footer>Filière STIC, École Supérieure d’Industrie, Institut National Polytechnique Félix Houphouët-Boigny.<br>Contenus d’illustration à remplacer par les informations officielles.</footer>
+<div id="lb"><div></div></div>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const html=(el,a,f)=>$(el).innerHTML=a.map(f).join('');
+const hue=i=>`linear-gradient(135deg,hsl(0 0% ${12+(i*3)%10}%),hsl(0 0% ${2+(i*2)%5}%))`;
+const PHOTOS={};/* Ajoutez vos vraies photos : PHOTOS.apropos='https://…' (accueil, apropos, equipe, evenements, alumni, actualites, projets, galerie, contact) */
+const ICO={building:'<path d="M20 50H80M24 50V26M40 50V26M60 50V26M76 50V26M16 26H84L50 8Z"/><path d="M44 50V38H56V50"/>',people:'<circle cx="30" cy="24" r="8"/><circle cx="50" cy="20" r="10"/><circle cx="70" cy="24" r="8"/><path d="M16 50Q30 34 44 50M36 52Q50 30 64 52M56 50Q70 34 84 50"/>',cal:'<rect x="22" y="12" width="56" height="38" rx="5"/><path d="M22 24H78M36 8V16M64 8V16M34 34H42M48 34H56M62 34H70M34 42H42"/>',cap:'<path d="M50 12L84 26L50 40L16 26ZM30 33V45Q50 54 70 45V33M84 26V44"/>',news:'<path d="M24 28H40L68 14V46L40 32H24ZM32 32L36 48H44L40 32M74 24Q80 30 74 36"/>',laptop:'<rect x="26" y="12" width="48" height="30" rx="3"/><path d="M18 46H82L76 42H24ZM36 22L30 27L36 32M64 22L70 27L64 32M54 20L46 34"/>',camera:'<rect x="20" y="18" width="60" height="32" rx="5"/><circle cx="50" cy="34" r="10"/><path d="M38 18L42 12H58L62 18"/>',mail:'<rect x="20" y="14" width="60" height="36" rx="4"/><path d="M20 16L50 36L80 16"/>',chip:'<rect x="34" y="14" width="32" height="32" rx="3"/><rect x="42" y="22" width="16" height="16"/><path d="M42 14V8M50 14V8M58 14V8M42 46V52M50 46V52M58 46V52M34 22H28M34 30H28M34 38H28M66 22H72M66 30H72M66 38H72"/>',antenna:'<path d="M50 20V52M40 52H60M50 20L38 52M50 20L62 52"/><circle cx="50" cy="16" r="3"/><path d="M38 12Q50 -2 62 12M30 18Q50 -8 70 18"/>',play:'<circle cx="50" cy="30" r="16"/><path d="M45 22L58 30L45 38Z"/>'};
+const art=(k,h)=>{const n=art.n=(art.n||0)+1,x=h??n;return `<svg viewBox="0 0 100 60" preserveAspectRatio="xMidYMid slice"><defs><linearGradient id="g${n}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="hsl(0 0% ${16+(x*3)%10}%)"/><stop offset="1" stop-color="hsl(0 0% ${3+(x*2)%5}%)"/></linearGradient></defs><rect width="100" height="60" fill="url(#g${n})"/><g stroke="#fff4" fill="none">${[...Array(7)].map((_,i)=>`<circle cx="${8+i*14}" cy="${(i*23)%60}" r="${6+i%3*5}"/>`).join('')}</g><g stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none">${ICO[k]}</g></svg>`};
+const pic=(id,k,h)=>PHOTOS[id]?`<img src="${PHOTOS[id]}" alt="" loading="lazy">`:art(k,h);
+/* menu */
+const S=[['accueil','Accueil'],['apropos','À propos'],['equipe','Équipe'],['evenements','Événements'],['alumni','Alumni'],['actualites','Actualités'],['projets','Projets'],['galerie','Galerie'],['contact','Contact']];
+html('#links',S,([i,t])=>`<a href="#${i}">${t}</a>`);
+S.slice(1).forEach(([id],i)=>$('#'+id+' .lead').insertAdjacentHTML('afterend',`<div class="ban">${pic(id,['building','people','cal','cap','news','laptop','camera','mail'][i],i)}</div>`));
+$('#accueil').insertAdjacentHTML('beforeend',`<div class="hart">${pic('accueil','laptop',1)}</div>`);
+/* carte aérienne */
+let r=11;const rnd=()=>(r=r*16807%2147483647)/2147483647;
+let m='<defs><radialGradient id="gl"><stop offset="0" stop-color="#f26a1d" stop-opacity=".95"/><stop offset="1" stop-color="#f26a1d" stop-opacity="0"/></radialGradient><linearGradient id="gr" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff1e3"/><stop offset="1" stop-color="#ffd9b8"/></linearGradient></defs><rect width="1000" height="600" fill="url(#gr)"/>';
+for(let i=0;i<=20;i++)m+=`<path d="M${i*50} 0V600M0 ${i*30}H1000" stroke="#e8590c" stroke-opacity=".09"/>`;
+for(let i=0;i<300;i++){const x=rnd()*1000,y=rnd()*600;if(Math.abs(y-300)>16&&Math.abs(x-500)>16)m+=`<circle cx="${x|0}" cy="${y|0}" r="${3+rnd()*6|0}" fill="hsl(${18+rnd()*14|0} 60% ${55+rnd()*12|0}%)"/>`}
+m+='<path d="M0 300H1000M500 0V600M0 470Q400 420 1000 520M160 0Q200 300 120 600" stroke="#ffffff" stroke-width="16" fill="none"/><circle cx="500" cy="300" r="34" fill="none" stroke="#ffffff" stroke-width="10"/><ellipse cx="800" cy="520" rx="90" ry="30" fill="#ffc999"/>';
+[[200,120,90,50],[330,150,60,90],[210,360,110,60],[380,380,70,70],[560,120,100,60],[720,140,120,70],[860,300,80,120],[700,400,110,60],[80,230,50,50],[430,40,80,40],[600,430,70,50]].forEach(([x,y,w,h])=>{m+=`<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="3" fill="#ffffff" stroke="#c9c2b2"/>`;for(let k=0;k<w/12;k++)m+=`<rect x="${x+6+k*12}" y="${y+6}" width="5" height="3" fill="#e3dac8" opacity="${(.3+rnd()*.7).toFixed(2)}"/>`});
+m+='<g transform="translate(610 310)"><circle r="75" fill="url(#gl)" class="pulse"/><path d="M-36-18H36V-4H11V24H-11V-4H-36Z" fill="#f26a1d" stroke="#7a2e08" stroke-width="2"/><text y="-26" text-anchor="middle" fill="#7a2e08" font-size="12" font-family="Outfit,sans-serif" font-weight="700">ESI</text></g>';
+$('#map').innerHTML=m;
+const intro=$('#intro');let fin=false;
+function enter(){if(fin)return;fin=true;intro.classList.add('done');document.body.classList.add('ready');setTimeout(()=>intro.remove(),1100)}
+$('#skip').onclick=enter;
+setTimeout(()=>intro.classList.add('go'),500);
+setTimeout(()=>$('#itx').textContent='Descente vers le bâtiment de l’ESI…',2200);
+setTimeout(()=>$('#itx').textContent='Bienvenue en STIC.',4300);
+setTimeout(enter,5300);
+/* données */
+const SP=[['INFO','Informatique','Génie logiciel, intelligence artificielle, cybersécurité, bases de données, cloud et DevOps. La spécialité qui conçoit, déploie et sécurise les systèmes d’information.',['Python','Java','IA et ML','Cybersécurité','Cloud','DevOps'],1],['EIT','Électronique, Informatique et Télécommunications','Systèmes embarqués, objets connectés et informatique industrielle. Elle relie le monde physique au numérique.',['Embarqué','IoT','FPGA','Automatique']],['TLR','Télécommunications et Réseaux','Réseaux, fibre optique, 5G et administration d’infrastructures, pour faire circuler l’information de façon fiable.',['Réseaux','5G','Fibre','Administration']]];
+const TB={Histoire:'Née de la volonté d’élèves-ingénieurs de la filière STIC, l’association fédère les promotions INFO, EIT et TLR de l’ESI. Elle est devenue le point de rencontre des étudiants, des enseignants et des diplômés autour des projets, de la culture et de l’entraide.',Mission:'Animer la vie de la filière, accompagner les étudiants dans leur parcours, organiser des événements techniques et culturels, et créer des ponts avec les entreprises et les anciens.',Vision:'Faire de STIC une communauté d’ingénieurs reconnue en Afrique de l’Ouest pour son excellence technique, son esprit d’équipe et son impact sur le numérique.',Objectifs:'Développer les compétences pratiques par les projets et les ateliers. Renforcer la cybersécurité et le génie logiciel. Faciliter l’accès aux stages et à l’emploi. Entretenir le réseau des alumni. Promouvoir la culture ivoirienne.'};
+html('#tabs',Object.keys(TB),(k,i)=>`<button class="${i?'':'on'}">${k}</button>`);
+$('#tabc').textContent=TB.Histoire;
+$('#tabs').onclick=e=>{if(e.target.tagName!='BUTTON')return;$$('#tabs button').forEach(b=>b.classList.toggle('on',b==e.target));const c=$('#tabc');c.style.animation='none';c.offsetWidth;c.style.animation='';c.textContent=TB[e.target.textContent]};
+html('#sp',SP,([k,n,d,t,h])=>`<div class="card ${h?'big':''}"><h3 style="color:${h?'var(--c)':'var(--a)'}">${k}</h3><b>${n}</b><p style="margin-top:8px">${d}</p>${t.map(x=>`<span class="pill ${h?'hot':''}">${x}</span>`).join('')}</div>`);
+const EQ=[['Yao Koffi','Président','INFO 3'],['Aya Konan','Vice-présidente','EIT 3'],['Awa Diallo','Secrétaire générale','INFO 2'],['Ibrahim Traoré','Trésorier','TLR 3'],['Kévin N’Guessan','Responsable pôle technique','INFO 3'],['Estelle Kouamé','Communication et réseaux sociaux','INFO 2'],['Salimata Bamba','Pôle culturel et événements','TLR 2'],['Moussa Ouattara','Relations alumni et entreprises','EIT 2']];
+html('#eq',EQ,([n,r,p],i)=>`<div class="card"><div class="av" style="background:${hue(i).replace('38%','60%').replace('22%','45%')}">${n.split(' ').map(w=>w[0]).join('')}</div><h3>${n}</h3><div class="role">${r}</div><p>Promotion ${p}</p></div>`);
+const EV=[['Technique','05 nov. 2026','ESI Code Night','Hackathon de 24 h : en équipes, concevez une application utile au campus.','Amphi ESI'],['Conférence','21 nov. 2026','Cybersécurité et Active Directory','Attaques, durcissement et détection, avec démonstrations en direct.','Salle de conférences'],['Culturel','12 déc. 2026','Journée culturelle STIC','Tenues traditionnelles, musique, gastronomie et concours de talents.','Esplanade'],['Rencontre','16 janv. 2027','Soirée Alumni et mentorat','Retrouvailles avec les diplômés et séances de mentorat par spécialité.','Campus INP-HB'],['Technique','13 févr. 2027','Atelier IA et Python','De la donnée au modèle : initiation pratique au machine learning.','Salle informatique'],['Conférence','20 mars 2027','Forum entreprises et stages','Rencontres avec les recruteurs, ateliers CV et simulations d’entretien.','ESI']];
+const T=['Tous',...new Set(EV.map(e=>e[0]))];
+html('#ef',T,(t,i)=>`<button class="${i?'':'on'}">${t}</button>`);
+const drawEv=f=>html('#ev',EV.filter(e=>f=='Tous'||e[0]==f),([t,d,n,x,l])=>`<div class="card ev"><div class="d">${d.split(' ').slice(0,2).join('<br>')}</div><div><h3>${n}</h3><p>${x}</p><span class="pill">${t}</span><span class="pill">${l}</span></div></div>`);
+drawEv('Tous');
+$('#ef').onclick=e=>{if(e.target.tagName!='BUTTON')return;$$('#ef button').forEach(b=>b.classList.toggle('on',b==e.target));drawEv(e.target.textContent)};
+const AL=[['Yao Koffi','INFO, promo 2019','Ingénieur DevOps','Banque, Abidjan'],['Mariam Coulibaly','INFO, promo 2020','Ingénieure cybersécurité','Télécoms, Abidjan'],['Serge Kouadio','TLR, promo 2018','Architecte réseaux','Opérateur mobile'],['Nadège Bamba','EIT, promo 2021','Ingénieure systèmes embarqués','Industrie, Yamoussoukro'],['Franck Atta','INFO, promo 2017','Chef de projet logiciel','Start-up fintech'],['Fatou Sylla','INFO, promo 2022','Data scientist','Cabinet de conseil']];
+html('#al',AL,([n,p,j,c],i)=>`<div class="card"><div class="av" style="background:${hue(i+3).replace('38%','60%').replace('22%','45%')}">${n.split(' ').map(w=>w[0]).join('')}</div><h3>${n}</h3><div class="role">${j}</div><p>${c}</p><span class="pill">${p}</span></div>`);
+html('#nw',[['12 oct. 2026','Annonce','Inscriptions ouvertes pour l’ESI Code Night','Constituez votre équipe de 3 à 5 personnes et déposez votre idée avant le 30 octobre.'],['08 oct. 2026','Communiqué','Passation officielle du bureau STIC','Le nouveau bureau présente sa feuille de route : projets techniques, culture et alumni.'],['30 sept. 2026','Projet','Lancement du laboratoire de cybersécurité','Un domaine Active Directory de test pour s’entraîner à attaquer et à défendre.'],['18 sept. 2026','Vie de la filière','Rentrée : bienvenue aux nouveaux STIC','Parrainage des nouveaux, visite de l’ESI et présentation des trois spécialités.']],([d,t,n,x])=>`<div class="card"><div class="thumb">${art('news')}</div><span class="pill hot">${t}</span><h3 style="margin-top:10px">${n}</h3><p>${x}</p><p style="margin-top:10px;font-size:13px">${d}</p></div>`);
+const PJ=[['Portail étudiant STIC','INFO','Emplois du temps, annales et notifications dans une application web.',70,['React','Node.js','PostgreSQL']],['Laboratoire de cybersécurité','INFO','Active Directory de test, audit PingCastle et exercices attaque/défense.',55,['Windows Server','PowerShell','Wazuh']],['Assistant IA des cours','INFO','Un agent conversationnel qui répond à partir des supports de la filière.',30,['Python','LLM','FastAPI']],['Station météo connectée','EIT','Capteurs ESP32 et tableau de bord en temps réel.',85,['ESP32','MQTT','Grafana']],['Wi-Fi maillé du campus','TLR','Étude et déploiement d’un réseau sans fil robuste.',40,['Wi-Fi 6','VLAN','RADIUS']]];
+html('#pj',PJ,([n,s,d,p,t])=>`<div class="card"><div class="thumb">${art(s=='INFO'?'laptop':s=='EIT'?'chip':'antenna')}</div><span class="pill ${s=='INFO'?'hot':''}">${s}</span><h3 style="margin-top:10px">${n}</h3><p>${d}</p>${t.map(x=>`<span class="pill">${x}</span>`).join('')}<div class="bar"><i data-w="${p}"></i></div><p style="font-size:13px;margin-top:6px">Avancement : ${p} %</p></div>`);
+const GA=[['Remise des diplômes','Photo'],['ESI Code Night, le résumé','Vidéo'],['Journée culturelle','Photo'],['Atelier réseaux','Photo'],['Sortie pédagogique','Photo'],['Soutenance de projets','Vidéo'],['Passation du bureau','Photo'],['Visite du campus','Photo']];
+html('#ga',GA,([n,t],i)=>`<div class="tile" data-i="${i}" style="height:${[210,280,240,190,300,220,260,200][i]}px;background:${PHOTOS['g'+i]?`url(${PHOTOS['g'+i]}) center/cover`:hue(i)}"><svg class="ti" viewBox="0 0 100 60">${ICO[t=='Vidéo'?'play':'camera']}</svg><small>${t=='Vidéo'?'▶ ':''}${t}</small><span>${n}</span></div>`);
+$('#ga').onclick=e=>{const t=e.target.closest('.tile');if(!t)return;const b=$('#lb div');b.style.background=hue(+t.dataset.i);b.textContent=GA[t.dataset.i][0];$('#lb').classList.add('on')};
+$('#lb').onclick=()=>$('#lb').classList.remove('on');
+addEventListener('keydown',e=>e.key=='Escape'&&$('#lb').classList.remove('on'));
+/* accueil */
+html('#stats',[[3,'spécialités d’ingénieur'],[5,'années de formation, Bac+5'],[300,'alumni dans le réseau'],[12,'projets menés par les étudiants']],([n,l])=>`<div><b data-n="${n}">0</b><span>${l}</span></div>`);
+const MSG=['<b>Important</b> Inscriptions ouvertes pour l’ESI Code Night le 5 novembre','<b>À venir</b> Conférence cybersécurité et Active Directory le 21 novembre','<b>Communiqué</b> Passation du bureau STIC effectuée','<b>Projet</b> Laboratoire de cybersécurité : rejoignez l’équipe','<b>Alumni</b> Soirée mentorat le 16 janvier 2027'];
+$('#tk').innerHTML=[...MSG,...MSG].map(x=>`<span>${x}</span>`).join('');
+const W=['génie logiciel.','intelligence artificielle.','cybersécurité.','cloud et DevOps.','réseaux et systèmes embarqués.'];let wi=0,ci=0,del=false;
+(function ty(){const w=W[wi];ci+=del?-1:1;$('#tw').textContent=w.slice(0,ci);if(!del&&ci==w.length){del=true;return setTimeout(ty,1500)}if(del&&ci==0){del=false;wi=(wi+1)%W.length}setTimeout(ty,del?35:75)})();
+/* compteurs et barres au scroll */
+new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.unobserve(e.target);const t=e.target;if(t.dataset.n){const n=+t.dataset.n,s=performance.now();(function f(x){const k=Math.min(1,(x-s)/1600);t.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(s)}else t.style.width=t.dataset.w+'%'}),{threshold:.4}).observe&&(()=>{const io=new IntersectionObserver((es,o)=>es.forEach(e=>{if(!e.isIntersecting)return;o.unobserve(e.target);const t=e.target;if(t.dataset.n){const n=+t.dataset.n,s=performance.now();(function f(x){const k=Math.min(1,(x-s)/1600);t.textContent=Math.round(n*(1-Math.pow(1-k,3)));if(k<1)requestAnimationFrame(f)})(s)}else t.style.width=t.dataset.w+'%'}),{threshold:.4});$$('[data-n],.bar i').forEach(x=>io.observe(x))})();
+/* navigation active, progression, tilt, thème */
+const so=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting&&$$('#links a').forEach(a=>a.classList.toggle('on',a.hash=='#'+e.target.id))),{rootMargin:'-45% 0px -50%'});
+$$('section').forEach(s=>so.observe(s));
+addEventListener('scroll',()=>$('#pg').style.width=scrollY/(document.body.scrollHeight-innerHeight)*100+'%',{passive:true});
+document.addEventListener('mousemove',e=>{const c=e.target.closest&&e.target.closest('.card');$$('.card').forEach(x=>{if(x!=c){x.style.setProperty('--rx','0deg');x.style.setProperty('--ry','0deg')}});if(!c)return;const b=c.getBoundingClientRect();c.style.setProperty('--ry',((e.clientX-b.left)/b.width-.5)*7+'deg');c.style.setProperty('--rx',-((e.clientY-b.top)/b.height-.5)*7+'deg')});
+$('#th').onclick=()=>{const d=document.documentElement,l=getComputedStyle(d).colorScheme.startsWith('light');d.dataset.mode=l?'dark':'light'};
+$('#fm').onsubmit=e=>{e.preventDefault();location.href=`mailto:stic.esi@exemple.ci?subject=${encodeURIComponent($('#fs').value+' – '+$('#fn').value)}&body=${encodeURIComponent($('#fx').value+'\n\n'+$('#fe').value)}`;$('#ok').textContent='Merci, votre application de messagerie s’ouvre pour envoyer le message.'};
+/* molécules */
+const cv=$('#net'),cx=cv.getContext('2d');let w,h,P=[];
+function rs(){w=cv.width=innerWidth;h=cv.height=innerHeight;P=Array.from({length:Math.min(44,w/30|0)},(_,i)=>({x:Math.random()*w,y:Math.random()*h,vx:(Math.random()-.5)*.5,vy:(Math.random()-.5)*.5,r:i%6==0?11:4+Math.random()*7}))}
+rs();addEventListener('resize',rs);
+(function f(){cx.clearRect(0,0,w,h);cx.lineWidth=1.8;P.forEach((a,i)=>{a.x=(a.x+a.vx+w)%w;a.y=(a.y+a.vy+h)%h;for(let j=i+1;j<P.length;j++){const b=P[j],d=Math.hypot(a.x-b.x,a.y-b.y);if(d<240){cx.strokeStyle=`rgba(255,138,31,${.5*(1-d/240)})`;cx.beginPath();cx.moveTo(a.x,a.y);cx.lineTo(b.x,b.y);cx.stroke()}}});P.forEach((a,i)=>{const c=i%6==0?'242,106,29':'255,138,31';cx.fillStyle=`rgba(${c},.13)`;cx.beginPath();cx.arc(a.x,a.y,a.r*2.4,0,7);cx.fill();cx.fillStyle=`rgba(${c},.85)`;cx.beginPath();cx.arc(a.x,a.y,a.r,0,7);cx.fill()});requestAnimationFrame(f)})();
+</script>
+</body>
+</html>
